@@ -2,6 +2,7 @@
 	.fpu vfp
 	.text
 
+@ print function is complete, no modifications needed
     .global	print
 print:
 	stmfd	sp!, {r3, lr}
@@ -17,44 +18,45 @@ startstring:
 
     .global	towers
 towers:
-   /* Save Registers */
+   /* Save calllee-saved registers to stack */
    
-   /* Save a copy of all 3 original parameters */
+   /* Save a copy of all 3 incoming parameters */
 
 if:
    /* Compare numDisks with 2 or (numDisks - 2)*/
    /* Check if less than, else branch to else */
    
-   /* set start to start for printing */
-   /* set end to end for printing */
+   /* set print function's start to incoming start */
+   /* set print function's end to goal */
    /* call print function */
    /* Set return register to 1 */
    /* branch to endif */
 else:
-   /* Use a saved varable for temp and set it to 6 */
+   /* Use a callee-saved varable for temp and set it to 6 */
    /* Subract start from temp and store to itself */
    /* Subtract goal from temp and store to itself (temp = 6 - start - goal)*/
 
    /* subtract 1 from original numDisks and store it to numDisks parameter */
 
-   /* Set end as temp */
+   /* Set end parameter as temp */
    /* Call towers function */
-   /* Save result to saved variable for total steps */
-   /* Set numDiscs to 1 */
-   /* Set start to original start */
-   /* Set goal to original goal */
+   /* Save result to callee-saved register for total steps */
+   /* Set numDiscs parameter to 1 */
+   /* Set start parameter to original start */
+   /* Set goal parameter to original goal */
    /* Call towers function */
    /* Add result to total steps so far */
    
-   /* Set numDisks to original numDisks - 1 */
-   /* set start to temp */
-   /* set goal to original goal */
+   /* Set numDisks parameter to original numDisks - 1 */
+   /* set start parameter to temp */
+   /* set goal parameter to original goal */
    /* Call towers function */
    /* Add result to total steps so far and save it to return register */
 
 endif:
    /* Restore Registers */
 
+@ Function main is complete, no modifications needed
     .global	main
 main:
 	str	lr, [sp, #-4]!
@@ -85,12 +87,12 @@ printdata:
 	.word	string3
 
 string0:
-	.ascii	"Move from peg %d to peg %d\012\000"
+	.asciz	"Move from peg %d to peg %d\n"
 string1:
-	.ascii	"Enter number of discs to be moved: \000"
+	.asciz	"Enter number of discs to be moved: "
 string2:
-	.ascii	"%d\000"
+	.asciz	"%d"
 	.space	1
 string3:
-	.ascii	"\012%d discs moved from peg %d to peg %d in %d steps."
+	.ascii	"\n%d discs moved from peg %d to peg %d in %d steps."
 	.ascii	"\012\000"
